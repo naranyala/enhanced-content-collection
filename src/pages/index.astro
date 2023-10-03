@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import { getCollection } from 'astro:content';
+
+const demoCollection = await getCollection("en-demo")
+
+console.log(demoCollection)
+
+---
+
+<Layout title="Welcome to Astro.">
+	<header>
+		<h1>Demo Enhanced Content Collection</h1>
+		<p>Depend on `markdown-it` and `sanitize-html`</p>
+	</header>
+	<main>
+		{demoCollection.map}
+	</main>
+</Layout>
+
+<style>
+	
+</style>
