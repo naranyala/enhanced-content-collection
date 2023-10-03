@@ -12,9 +12,13 @@ console.log(finalCollection)
 --- 
 
 <Layout title="Welcome to Astro.">
-	<header class="mx-auto my-4 p-4 border-2 border-gray-300 rounded-lg">
-		<h1 class="text-3xl">Demo Enhanced Content Collection</h1>
-		<p>Depend on `markdown-it` and `sanitize-html`</p>
+	<header class="mx-auto my-4 p-4 border-2 border-gray-300 rounded-lg leading-8">
+		<h1 class="text-3xl">Demo Enhanced Content Collection</h1><hr/>
+		<p>Depend on `markdown-it` and `sanitize-html`</p><hr/>
+		<p>The main differentiate is new `headings` obj for each markdown content that currectly need to setup manually</p>
+		<p>It would be handly if built in as feature in Astro content-collection</p><hr/>
+		<p>My main case is trying to more easy create `table-of-content` and wanna be able fuzzy search deeply into markdown (e.g. using Fuse.js)</p>
+		<p>Imagine searching "heading" content with SearchBar or searching inside long README content (e.g. awesome-repo-blabla), Github has feature to jump between heading a.k.a TOC</p>
 	</header>
 	<main>
 		<span class="text-2xl ml-4">from this:</span>
