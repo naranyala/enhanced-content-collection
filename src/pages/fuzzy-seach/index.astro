@@ -1,7 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import DemoFuzzySearch from './DemoFuzzySearch.jsx'
+
+import { getCollection } from 'astro:content';
+import { enhanceContentCollection } from '../../lib/utils/markdown'
+
+const demoCollection = await getCollection("en-demo")
+const finalCollection = enhanceContentCollection(demoCollection)
+
+import Fuse from 'fuse.js'
+
+const FUSE_OPTIONS = {
+  includeScore: true,
+  shouldSort: true,
+  includeMatches: true,
+  minMatchCharLength: 1,
+  threshold: 0.5,
+  keys: [
+    { name: "body", weight: 2 },
+    { name: "data.title", weight: 1 },
+    { name: "data.context", weight: 1 },
+    { name: "data.tags", weight: 1 },
+  ]
+}
+
+
 ---
 
 <Layout title="Demo Fuzzy Seach">
-
+  <DemoFuzzySearch client:only content={finalCollection}/>
 </Layout>
