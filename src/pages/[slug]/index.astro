@@ -29,17 +29,17 @@ const { Content } = await demoContent.render();
 // const { selectedContent } = Astro.props;
 const finalContent = enhanceContentCollection(selectedContent)
 
-console.log(finalContent)
+console.log(JSON.stringify(finalContent[0].headings))
 //const { Content } = await finalContent.render()
 
 ---
 
-<Layout>
-  <a href="/" class="hover:underline">GO BACK</a>
+<Layout title="Demo Content">
+  <div class="ml-8 mt-8"><a href="/" class="hover:underline">GO BACK</a></div>
   <header>
-    <SampleTOC client:only headings={finalContent.headings}/>
+    <SampleTOC client:only headings={finalContent[0].headings}/>
   </header>
-  <main>
+  <main class="m-4 p-4">
     <article class="prose lg:prose-xl">
       <Content/>
     </article>

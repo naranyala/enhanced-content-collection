@@ -1,8 +1,13 @@
 
-import { createSignal, For, Switch, Match } from 'solid-js'
+import { createSignal, For, Switch, Match, onMount } from 'solid-js'
 
 export default function SampleToc(props) {
-  const [heading, setHeading] = createSignal(props.headings)
+  const [heading, setHeading] = createSignal([])
+
+  onMount(() => {
+    console.log(props.headings)
+    setHeading(props.headings)
+  })
 
   return (
     <div class="m-4 p-4 rounded-lg bg-white/80">
@@ -12,7 +17,7 @@ export default function SampleToc(props) {
         {(headLevel1, idx1) => (
             <>
           <li key={idx1} class="hover:bg-gray-300 m-1 p-1 rounded">
-              <a href={`/essays/${headLevel1.link}`}>{headLevel1.text}</a>
+              <a href={headLevel1.link}>{headLevel1.text}</a>
           </li>
             <Switch>
                 <Match when={headLevel1.children}>
