@@ -23,6 +23,7 @@ const { Content } = await finalCollection[1].render();
 		<p>My main case is trying to create `table-of-content`more easy and wanna be able fuzzy search deeply into markdown (e.g. using Fuse.js)</p>
 		<p>Imagine searching "heading" content with SearchBar or searching inside long README content (e.g. awesome-repo-blabla), Github has feature to jump between heading a.k.a TOC</p><hr/>
 		<h2 class="font-bold">DEMO CONTENT</h2>
+		<span>in markdown content, try to change default `h1` into `h2`, from `#` into `##`</span>
 		<ul>
 			{finalCollection.map((item, idx) => (
 					<li class="hover:underline text-blue-600"><a href={item.slug}>{item.data.title}</a></li>

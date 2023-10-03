@@ -1,20 +1,6 @@
-
-export default function DemoFuzzySearch(props){
-  return (
-    <div>
-      <h1>Demo Fuzzy Search</h1>
-    </div>
-  )
-}
-
-
 import { onMount, createSignal, Switch, Match } from 'solid-js'
 import { For } from 'solid-js'
-
-import axios from 'axios'
 import Fuse from 'fuse.js'
-
-//import { limitString } from '../../libs/utils/string.js'
 
 const FUSE_OPTIONS = {
   includeScore: true,
@@ -31,7 +17,7 @@ const FUSE_OPTIONS = {
 }
 
 
-export default function SearchBar(props) {
+export default function DemoFuzzySearch(props) {
   const [content, setContent] = createSignal(props.content)
   const [query, setQuery] = createSignal("")
   const [result, setResult] = createSignal([])
