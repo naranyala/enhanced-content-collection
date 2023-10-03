@@ -46,7 +46,6 @@ export default function SampleToc(props) {
         )}
       </For>
           </ul>
-
     </div>
   )
 }
