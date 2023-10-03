@@ -1,0 +1,45 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro'
+import SampleTOC from '../../components/SampleTOC.jsx'
+
+import { getCollection } from 'astro:content';
+import { enhanceContentCollection } from '../../lib/utils/markdown'
+
+export const getStaticPaths = async () => {
+  const demoCollection = await getCollection("en-demo");
+
+  const paths = demoCollection.map((demoContent) => {
+    
+    const selectedContent = demoCollection.filter((item) => item.slug == demoContent.slug)
+
+    return {
+      params: { slug: demoContent.slug },
+      props: { demoContent, selectedContent },
+    };
+  });
+
+  return paths;
+};
+
+const { demoContent, selectedContent } = Astro.props;
+const { Content } = await demoContent.render();
+
+// const { selectedContent } = Astro.props;
+const finalContent = enhanceContentCollection(selectedContent)
+
+console.log(finalContent)
+//const { Content } = await finalContent.render()
+
+---
+
+<Layout>
+  <a href="/" class="hover:underline">GO BACK</a>
+  <header>
+    <SampleTOC client:only headings={finalContent.headings}/>
+  </header>
+  <main>
+    <Content/>
+  </main>
+</Layout>
