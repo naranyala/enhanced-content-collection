@@ -17,15 +17,14 @@ const { Content } = await finalCollection[1].render();
 <Layout title="Enhance Content Collection">
 	<header class="m-4 p-4 border-2 border-gray-300 rounded-lg leading-10 text-justify">
 		<h1 class="text-3xl font-bold text-left">Demo Enhanced Content Collection</h1><hr/>
-		<p>Depend on `markdown-it` and `sanitize-html`</p><hr/>
+		<p>Depend on "markdown-it" and "sanitize-html"</p><hr/>
 		<h2 class="font-bold">Example Error (strict content heading)</h2>
 		<img src={imageError.src} alt="error" class="w-full"/>
 		<hr/>
 		<h2 class="font-bold">Context</h2>
-		<p>The main difference is the new headings object for each Markdown content, which currently needs to be set up manually. It would be handy if it were built-in as a feature in Astro's content collection.</p><hr/>
+		<p>The main difference is the new "headings" object for each Markdown content, which currently needs to be set up manually. It would be handy if it were built-in as a feature in Astro's content collection.</p><hr/>
 		<h2 class="font-bold">Explanation</h2>
-		<p>My primary goal is to make it easier to create a table-of-contents and enable fuzzy searching deep into Markdown (e.g., using Fuse.js).</p>
-	<p>Imagine being able to search for 'heading' content using a SearchBar or searching within lengthy README content (e.g., an awesome repository). GitHub has a feature that allows you to navigate between headings, also known as TOC.</p><hr/>
+		<p>My primary goal is to make it easier to create a table-of-contents and enable fuzzy searching deep into markdown headings (e.g., using Fuse.js).</p>
 		<h2 class="font-bold">DEMO CONTENT</h2>
 		<span>In markdown content, try to change default `h1` into `h2`, from `#` into `##`</span>
 		<ul>

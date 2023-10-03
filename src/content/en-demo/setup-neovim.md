@@ -7,7 +7,7 @@ tags: ["tools", "code-editor"]
 # Setup Neovim
 
 ```sh
-# example error in terminal / it's show on Astro error handler
+# example error in terminal / is show on Astro error handler
   Collection    : en-demo
   Content       : setup-neovim
   Error         : The heading with level 2 doesn't have a valid parent.

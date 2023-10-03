@@ -9,7 +9,7 @@ const FUSE_OPTIONS = {
   minMatchCharLength: 1,
   threshold: 0.5,
   keys: [
-    { name: "body", weight: 2 },
+    {name: "headings", weight: 2},
     { name: "data.title", weight: 1 },
     { name: "data.context", weight: 1 },
     { name: "data.tags", weight: 1 },
@@ -45,28 +45,21 @@ export default function DemoFuzzySearch(props) {
     setResult([])
   }
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Escape" || event.key === "Esc") {
-      console.log("Escape key pressed!");
-    }
-  }
-
   return (
-   <div>
+   <div class="m-4 p-4">
           <div class="flex justify-between flex-col">
-            <span class="text-xl text-center mx-auto font-bold">All Essay Search</span>
+            <span class="text-xl text-center mx-auto font-bold">Fuzzy Search</span>
             <div class="flex flex-col items-center text-center w-full text-xl">
               <span>Total match <b class="font-bold">{matchTotal()}</b></span>
             </div>
 
           </div>
 
-          <div class="relative flex-grow text-center">
+          <div class="relative flex-grow text-center my-4">
             <input
               ref={elInputQuery}
               id="search-query"
               onKeyUp={handleSearchAction}
-              onKeyDown={handleKeyDown}
               placeholder="Search"
               value={query()}
               type="text" class="w-full px-4 py-2 border rounded-lg" />
@@ -86,11 +79,13 @@ export default function DemoFuzzySearch(props) {
                   {(content, idx) => (
                     <li class="my-1 h-min">
                       <a
-                        href={`/essays/${content.item.slug}`}
+                        href={content.item.slug}
                         class="flex justify-between rounded-lg px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
                       >
                         <h1 class="flex-1 text-lg text-left font-bold items-start">{content.item.data.title}</h1>
                         <small class="flex-1 text-right right-0 items-end">{content.item.data.context}</small>
+                        <hr/>
+                        <div>{JSON.stringify(content.item.headings, null, 2)}</div>
                       </a>
                     </li>
 
