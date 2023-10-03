@@ -2,20 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 
 import { getCollection } from 'astro:content';
+import { enhanceContentCollection } from '../lib/utils/markdown'
 
 const demoCollection = await getCollection("en-demo")
-
+const finalCollection = enhanceContentCollection(demoCollection)
 console.log(demoCollection)
+console.log(finalCollection)
 
----
+--- 
 
 <Layout title="Welcome to Astro.">
-	<header>
-		<h1>Demo Enhanced Content Collection</h1>
+	<header class="mx-auto my-4 p-4 border-2 border-gray-300 rounded-lg">
+		<h1 class="text-3xl">Demo Enhanced Content Collection</h1>
 		<p>Depend on `markdown-it` and `sanitize-html`</p>
 	</header>
 	<main>
-		{demoCollection.map}
+		<span class="text-2xl ml-4">from this:</span>
+		<pre class="bg-gray-300 rounded-lg m-4 p-4">{JSON.stringify(demoCollection, null, 2)}</pre>
+
+		<span class="text-2xl ml-4">to this:</span>
+		<pre class="bg-gray-300 rounded-lg m-4 p-4">{JSON.stringify(finalCollection, null, 2)}</pre>
 	</main>
 </Layout>
 
