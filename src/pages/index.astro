@@ -4,6 +4,8 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { enhanceContentCollection } from '../lib/utils/markdown'
 
+import imageError from '../assets/example-error.png'
+
 const demoCollection = await getCollection("en-demo")
 const finalCollection = enhanceContentCollection(demoCollection)
 // console.log(demoCollection)
@@ -13,17 +15,19 @@ const { Content } = await finalCollection[1].render();
 --- 
 
 <Layout title="Enhance Content Collection">
-	<header class="m-4 p-4 border-2 border-gray-300 rounded-lg leading-8">
-		<h1 class="text-3xl font-bold">Demo Enhanced Content Collection</h1><hr/>
+	<header class="m-4 p-4 border-2 border-gray-300 rounded-lg leading-10 text-justify">
+		<h1 class="text-3xl font-bold text-left">Demo Enhanced Content Collection</h1><hr/>
 		<p>Depend on `markdown-it` and `sanitize-html`</p><hr/>
+		<h2 class="font-bold">Example Error (strict content heading)</h2>
+		<img src={imageError.src} alt="error" class="w-full"/>
+		<hr/>
 		<h2 class="font-bold">Context</h2>
-		<p>The main differentiate is new `headings` obj for each markdown content that currectly need to setup manually</p>
-		<p>It would be handly if built in as feature in Astro content-collection</p><hr/>
+		<p>The main difference is the new headings object for each Markdown content, which currently needs to be set up manually. It would be handy if it were built-in as a feature in Astro's content collection.</p><hr/>
 		<h2 class="font-bold">Explanation</h2>
-		<p>My main case is trying to create `table-of-content`more easy and wanna be able fuzzy search deeply into markdown (e.g. using Fuse.js)</p>
-		<p>Imagine searching "heading" content with SearchBar or searching inside long README content (e.g. awesome-repo-blabla), Github has feature to jump between heading a.k.a TOC</p><hr/>
+		<p>My primary goal is to make it easier to create a table-of-contents and enable fuzzy searching deep into Markdown (e.g., using Fuse.js).</p>
+	<p>Imagine being able to search for 'heading' content using a SearchBar or searching within lengthy README content (e.g., an awesome repository). GitHub has a feature that allows you to navigate between headings, also known as TOC.</p><hr/>
 		<h2 class="font-bold">DEMO CONTENT</h2>
-		<span>in markdown content, try to change default `h1` into `h2`, from `#` into `##`</span>
+		<span>In markdown content, try to change default `h1` into `h2`, from `#` into `##`</span>
 		<ul>
 			{finalCollection.map((item, idx) => (
 					<li class="hover:underline text-blue-600"><a href={item.slug}>{item.data.title}</a></li>
