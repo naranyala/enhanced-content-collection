@@ -28,7 +28,6 @@ function organizeByHeading(collectionName, parentSlug, inputData) {
     const newItem = {
       "type": `h${item.level}`,
       "text": item.text,
-      "slug": item.slug,
       "link": item.link,
       "children": [],
     };
@@ -54,7 +53,7 @@ function resolveHeading(collectionName, parentSlug, markdownContent) {
       const cleanSlug = headingHtml.toLowerCase().replace(/\s+/g, '-');
       const link = `${parentSlug}#${cleanSlug}`;
 
-      headings.push({ level, text, slug: cleanSlug, link });
+      headings.push({ level, text, link });
     }
   }
 
