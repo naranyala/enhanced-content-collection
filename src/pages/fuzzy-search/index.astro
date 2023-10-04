@@ -1,13 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import DemoFuzzySearch from './DemoFuzzySearch.jsx'
+import DemoFuzzySearch from '../../components/DemoFuzzySearch.jsx'
 
 import { getCollection } from 'astro:content';
 import { enhanceContentCollection } from '../../lib/utils/markdown'
 
 const demoCollection = await getCollection("en-demo")
 const finalCollection = enhanceContentCollection(demoCollection)
-
 // console.log(finalCollection)
 
 ---

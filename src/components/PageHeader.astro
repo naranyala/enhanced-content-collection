@@ -1,0 +1,53 @@
+---
+import imageErrorA from '../assets/example-error-01.png'
+import imageErrorB from '../assets/example-error-02.png'
+
+const { finalCollection } = Astro.props
+
+---
+
+<header class="m-4 p-4 border-2 border-gray-300 rounded-lg leading-10 text-justify">
+		<h1 class="text-xl font-bold text-left">Enhance Content Collection: Strict Content Heading</h1>
+		<p>
+Inspired by errors that occur when content frontmatter doesn't match the schema, this type of error is shown to help identify and fix issues. Such errors typically arise when the content lacks the proper h1, h2, h3 structure. For instance, if the content (markdown) only contains h2, h2, and h2 headings without an h1 at the top, or in cases where nested headings lack clear parent headings.
+  </p><hr/>
+		<h2 class="font-bold">Example Errors</h2>
+		<p><ul class="list-disc mb-6">
+The error will occur in cases such as:
+
+<li class="ml-8">When an h2 heading doesn't have an h1 parent or in similar nested scenarios.</li>
+<li class="ml-8">After an h1 heading, there is no h2, but an h3 is found."</li>
+		</ul></p>
+		<img src={imageErrorA.src} alt="error-a" class="w-full mb-2"/>
+		<img src={imageErrorB.src} alt="error-b" class="w-full mb-2"/>
+		<hr/>
+		<h2 class="font-bold">Ideas</h2>
+  <p>
+In case you want to create a 'table-of-contents' and be able to search for heading content, similar to the GitHub README feature, I believe many of us find ourselves repeating the same steps when moving between similar projects.</p>
+
+<p>The primary difference compared to the current result from the content-collection is the introduction of the new 'headings' object for each markdown content (as shown in the code below). It would be convenient if this functionality were integrated as a built-in feature in Astro's Content Collection.</p>
+  </p>
+		<h2 class="font-bold">Motivation</h2>
+  <p>
+My primary goal is to simplify the process of creating a table of contents by sending the heading structure to the TOC component and enabling fuzzy searching within markdown headings (in my case, utilizing Fuse.js).</p>
+
+<p>For now, I can only provide ideas, so please feel free to modify them and submit a pull request (if this proposal is approved) or even enhance this feature further!</p>
+		<hr/>
+		<h2 class="font-bold">Demo Content</h2>
+  <p>
+To intentionally trigger an error, modify the code by changing h1 to h2, replacing # with ## in the codebase, or altering other nested headings to simulate an incorrect heading structure (removing the parent heading). Observe the error in the terminal and within Astro's Error Handler.
+  </p>
+		<ul class="mb-4">
+			{finalCollection.map((item, idx) => (
+					<li key={idx} class="hover:underline text-blue-600"><a href={item.slug}>{item.data.title}</a></li>
+			))}
+		</ul>
+		<hr/>
+		<h2 class="font-bold">Demo Fuzzy Search</h2>
+  <p>
+I believe the main benefit arises when you can search deeply within markdown headings (e.g., jump to various content headings using the global search component).
+  </p>
+		<a href="/fuzzy-search" class="hover:underline text-blue-600 text-sm">demo navigate between content headings</a>
+
+	</header>
+

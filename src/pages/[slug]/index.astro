@@ -10,9 +10,10 @@ import { enhanceContentCollection } from '../../lib/utils/markdown'
 export const getStaticPaths = async () => {
   const demoCollection = await getCollection("en-demo");
 
-  const paths = demoCollection.map((demoContent) => {
-    
-    const selectedContent = demoCollection.filter((item) => item.slug == demoContent.slug)
+  const paths = demoCollection.map((demoContent) => {    
+    const selectedContent = demoCollection.filter((item) => {
+      return item.slug == demoContent.slug
+    });
 
     return {
       params: { slug: demoContent.slug },
@@ -26,11 +27,8 @@ export const getStaticPaths = async () => {
 const { demoContent, selectedContent } = Astro.props;
 const { Content } = await demoContent.render();
 
-// const { selectedContent } = Astro.props;
 const finalContent = enhanceContentCollection(selectedContent)
-
-console.log(JSON.stringify(finalContent[0].headings))
-//const { Content } = await finalContent.render()
+// console.log(JSON.stringify(finalContent[0].headings))
 
 ---
 

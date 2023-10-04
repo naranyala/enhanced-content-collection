@@ -28,6 +28,7 @@ function organizeByHeading(collectionName, parentSlug, inputData) {
     const newItem = {
       "type": `h${item.level}`,
       "text": item.text,
+      "slug": item.slug,
       "link": item.link,
       "children": [],
     };
@@ -53,7 +54,7 @@ function resolveHeading(collectionName, parentSlug, markdownContent) {
       const cleanSlug = headingHtml.toLowerCase().replace(/\s+/g, '-');
       const link = `${parentSlug}#${cleanSlug}`;
 
-      headings.push({ level, text, link });
+      headings.push({ level, text, slug: cleanSlug, link });
     }
   }
 
@@ -62,7 +63,7 @@ function resolveHeading(collectionName, parentSlug, markdownContent) {
 }
 
 export function enhanceContentCollection(contentCollectionOrigin) {
-  const finalContent = contentCollectionOrigin.map((item, idx) => {
+  const finalContent = contentCollectionOrigin.map((item) => {
     const headings = resolveHeading(item.collection, item.slug, item.body);
 
     return { ...item, headings };

@@ -16,6 +16,7 @@ Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint 
 ```
 
 ```sh
+# example error in terminal (is displayed on Astro error handler)
   Collection    : en-demo
   Content       : setup-neovim
   Error         : Invalid heading hierarchy. Heading level 3 is not allowed after level 1.

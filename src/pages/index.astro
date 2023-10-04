@@ -1,52 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro'
 
 import { getCollection } from 'astro:content';
 import { enhanceContentCollection } from '../lib/utils/markdown'
-
-import imageErrorA from '../assets/example-error-01.png'
-import imageErrorB from '../assets/example-error-02.png'
 
 const demoCollection = await getCollection("en-demo")
 const finalCollection = enhanceContentCollection(demoCollection)
 // console.log(demoCollection)
 // console.log(finalCollection)
-const { Content } = await finalCollection[1].render();
 
 --- 
 
 <Layout title="Enhance Content Collection">
-	<header class="m-4 p-4 border-2 border-gray-300 rounded-lg leading-10 text-justify">
-		<h1 class="text-xl font-bold text-left">Enhance Content Collection: Strict Content Heading</h1>
-		<p>Inspired from error when content frontmatter doesn't match the schema will show error to fix. This type of error will show when content doesn't have proper h1, h2, h3 structure, like the content (markdown) only has h2, h2, and h2 without h1 on top of it, similar case for more nested heading when the parent heading unclear.</p><hr/>
-		<h2 class="font-bold">Example Error</h2>
-		<p><ul class="list-disc mb-6">The error will happen in case like:
-		<li class="ml-8">"when h2 doesn't have h1 parent, or same nested case"</li>
-		<li class="ml-8">"after h1 there is no h2 but h3 found"</li>
-		</ul></p>
-		<img src={imageErrorA.src} alt="error-a" class="w-full mb-2"/>
-		<img src={imageErrorB.src} alt="error-b" class="w-full mb-2"/>
-		<hr/>
-		<h2 class="font-bold">Ideas</h2>
-		<p>In case wanna make "table-of-contents" and be able search on heading content (like Github README feature), I think most of us will do same thing repeatly when jump between similiar project.</p>
-		<p>The main difference between the current result from content-collection is the new "headings" object for each markdown content (see code below). It would be handy if it were built-in as a feature in Astro's Content Collection.</p><hr/>
-		<h2 class="font-bold">Motivation</h2>
-		<p>My primary goal is to make it easier to create a table-of-contents (just send heading-structure to TOC component) and enable fuzzy searching deep into markdown headings (in my case using Fuse.js).</p>
-		<p>For know I just can provide an ideas, feel free modify and make PR of it (if this proposal approved), or even make it more awesome feature of it!</p>
-		<hr/>
-		<h2 class="font-bold">Demo Content</h2>
-		<p>To try trigger error, change code `h1` into `h2`, from `#` into `##` in codebase or other nested heading to simulate uncorrectness heading structure (remove the parent heading). See terminal error and Astro Error Handler.</p>
-		<ul class="mb-4">
-			{finalCollection.map((item, idx) => (
-					<li class="hover:underline text-blue-600"><a href={item.slug}>{item.data.title}</a></li>
-			))}
-		</ul>
-		<hr/>
-		<h2 class="font-bold">Demo Fuzzy Search</h2>
-		<p>I think this is the main beneficial when beable search deeply into markdown headings (e.g. jump to various content headings from global search component)</p>
-		<a href="/fuzzy-search" class="hover:underline text-blue-600 text-sm">demo jump between content headings</a>
+  <PageHeader finalCollection={finalCollection}/>
 
-	</header>
 	<main>
 		<h2 class="text-2xl ml-4 font-bold">Content Collection Result</h2>
 		<p class="ml-4 mb-4">see the new "headings" array from each content</p>
@@ -60,6 +28,3 @@ const { Content } = await finalCollection[1].render();
 
 </Layout>
 
-<style>
-	
-</style>
