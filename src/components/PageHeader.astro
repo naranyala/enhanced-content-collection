@@ -12,19 +12,19 @@ const { finalCollection } = Astro.props
 		<p>
 Inspired by errors that occur when content frontmatter doesn't match the schema, this type of error is shown to help identify content heading structure. Such errors typically arise when the content lacks the proper h1, h2, h3 structure. For instance, if the content (markdown) only contains h2, h2, and h2 headings without an h1 at the top, or in cases where nested headings lack clear parent headings.
   </p><hr/>
-		<h2 class="font-bold">Example Errors</h2>
+		<h2 class="font-bold">Demo Errors</h2>
 		<p><ul class="list-disc mb-6">
 The error will occur in cases such as:
 
 <li class="ml-8">When an h2 heading doesn't have an h1 parent or in similar nested scenarios.</li>
-<li class="ml-8">After an h1 heading, there is no h2, but an h3 is found."</li>
+<li class="ml-8">After an h1 heading, there is no h2, but an h3 is found.</li>
 		</ul></p>
 		<img src={imageErrorA.src} alt="error-a" class="w-full mb-2"/>
 		<img src={imageErrorB.src} alt="error-b" class="w-full mb-2"/>
 		<hr/>
 		<h2 class="font-bold">Ideas</h2>
   <p>
-In case we want to create a "table-of-contents" and be able to search for heading content, similar to the GitHub README feature. The primary difference compared to the current result from the content-collection is the new "headings" object for each markdown content (as shown in the code below). It would be convenient if this functionality were integrated as a built-in feature in Astro's Content Collection.</p>
+In case we want to create a "table-of-contents" and be able to search for heading content, similar to the GitHub README feature. The primary difference compared to the current result from the content-collection is the new "headings" array for each markdown content (as shown in the code below). It would be convenient if this functionality were integrated as a built-in feature in Astro's Content Collection.</p>
   </p>
 		<h2 class="font-bold">Motivation</h2>
   <p>
