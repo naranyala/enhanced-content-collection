@@ -16,26 +16,32 @@ export default function SampleToc(props) {
       <For each={heading()}>
         {(headLevel1, idx1) => (
             <>
-          <li key={idx1} class="hover:bg-gray-300 m-1 p-1 rounded w-max">
-              <a href={headLevel1.link}>{headLevel1.text}</a>
-          </li>
+          <a key={idx1} href={headLevel1.link} class="p-0 m-0">
+                          <li class="hover:bg-gray-300 w-max pl-2 py-1 m-0">
+                            {headLevel1.text}
+                          </li>
+                        </a>
             <Switch>
                 <Match when={headLevel1.children}>
                   <ul class="ml-6 border-l-4 border-gray-300">
                     <For each={headLevel1.children}>
                       {(headLevel2, idx2) => (
                         <>
-                        <li key={idx2} class="hover:bg-gray-300 m-1 p-1 rounded w-max">
-                          <a href={headLevel2.link}>{headLevel2.text}</a>
-                        </li>
+                        <a key={idx2} href={headLevel2.link} class="p-0 m-0">
+                          <li class="hover:bg-gray-300 w-max pl-2 py-1 m-0">
+                            {headLevel2.text}
+                          </li>
+                        </a>
             <Switch>
                 <Match when={headLevel2.children}>
                   <ul class="ml-6 border-l-4 border-gray-300">
                     <For each={headLevel2.children}>
                       {(headLevel3, idx3) => (
-                        <li key={idx3} class="hover:bg-gray-300 m-1 p-1 rounded w-max">
-                          <a href={headLevel3.link}>{headLevel3.text}</a>
-                        </li>
+                        <a key={idx3} href={headLevel3.link} class="p-0 m-0">
+                          <li class="hover:bg-gray-300 w-max pl-2 py-1 m-0">
+                            {headLevel3.text}
+                          </li>
+                        </a>
                       )}
                     </For>
                   </ul>
