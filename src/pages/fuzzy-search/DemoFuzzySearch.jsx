@@ -48,7 +48,7 @@ export default function DemoFuzzySearch(props) {
   return (
    <div class="m-4 p-4">
           <div class="flex justify-between flex-col">
-            <span class="text-xl text-center mx-auto font-bold">Jump between content headings</span>
+            <span class="text-xl text-center mx-auto font-bold">Jump between content headings with fuzzy search (without network connection)</span>
             <div class="flex flex-col items-center text-center w-full text-xl">
               <span>Total match <b class="font-bold">{matchTotal()}</b></span>
             </div>

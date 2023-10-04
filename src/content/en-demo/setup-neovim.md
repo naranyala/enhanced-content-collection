@@ -6,14 +6,20 @@ tags: ["tools", "code-editor"]
 
 # Setup Neovim
 
+Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+
 ```sh
-# example error in terminal / is show on Astro error handler
+# example error in terminal (is displayed on Astro error handler)
   Collection    : en-demo
   Content       : setup-neovim
   Error         : The heading with level 2 doesn't have a valid parent.
 ```
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+```sh
+  Collection    : en-demo
+  Content       : setup-neovim
+  Error         : Invalid heading hierarchy. Heading level 3 is not allowed after level 1.
+```
 
 ## Preparation
 

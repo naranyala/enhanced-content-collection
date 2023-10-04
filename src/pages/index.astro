@@ -26,10 +26,10 @@ const { Content } = await finalCollection[1].render();
 		<p>The main difference between the current result from content-collection is the new "headings" object for each markdown content (see code below). It would be handy if it were built-in as a feature in Astro's Content Collection.</p><hr/>
 		<h2 class="font-bold">Motivation</h2>
 		<p>My primary goal is to make it easier to create a table-of-contents (just send heading-structure to TOC component) and enable fuzzy searching deep into markdown headings (in my case using Fuse.js).</p>
-		<p>For know I just can provide an ideas, feel free modify and make PR of it (if this proposal approved).</p>
+		<p>For know I just can provide an ideas, feel free modify and make PR of it (if this proposal approved), or even make it more awesome feature of it!</p>
 		<hr/>
 		<h2 class="font-bold">Demo Content</h2>
-		<p>To try trigger error, change code `h1` into `h2`, from `#` into `##` in codebase. See terminal error and Astro Error Handler.</p>
+		<p>To try trigger error, change code `h1` into `h2`, from `#` into `##` in codebase or other nested heading to simulate uncorrectness heading structure (remove the parent heading). See terminal error and Astro Error Handler.</p>
 		<ul class="mb-4">
 			{finalCollection.map((item, idx) => (
 					<li class="hover:underline text-blue-600"><a href={item.slug}>{item.data.title}</a></li>
@@ -43,7 +43,7 @@ const { Content } = await finalCollection[1].render();
 	</header>
 	<main>
 		<h2 class="text-2xl ml-4 font-bold">Content Collection Result</h2>
-		<p class="ml-4 mb-4">see the new "headings" obj from each content</p>
+		<p class="ml-4 mb-4">see the new "headings" array from each content</p>
 		<span class="text-xl ml-4">from this:</span>
 		<small><pre class="bg-gray-300 rounded-lg m-4 p-4 overflow-x-auto">{JSON.stringify(demoCollection, null, 2)}</pre></small>
 

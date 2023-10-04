@@ -1,10 +1,10 @@
-
 import MarkdownIt from 'markdown-it';
-import sanitizeHtml from 'sanitize-html'
+import sanitizeHtml from 'sanitize-html';
 
 function organizeByHeading(collectionName, parentSlug, inputData) {
   const organizedData = [];
   const headingStack = [];
+  let previousLevel = 0; // Track the previous heading level
 
   for (const item of inputData) {
     while (headingStack.length >= item.level) {
@@ -19,6 +19,10 @@ function organizeByHeading(collectionName, parentSlug, inputData) {
       throw new Error(`
         Collection\t: ${collectionName}\nContent\t\t: ${parentSlug}\nError\t\t: The heading with level ${item.level} doesn't have a valid parent.
       `);
+    } else if (item.level > previousLevel + 1) {
+      throw new Error(`
+        Collection\t: ${collectionName}\nContent\t\t: ${parentSlug}\nError\t\t: Invalid heading hierarchy. Heading level ${item.level} is not allowed after level ${previousLevel}.
+      `);
     }
 
     const newItem = {
@@ -30,6 +34,7 @@ function organizeByHeading(collectionName, parentSlug, inputData) {
 
     parent.push(newItem);
     headingStack.push(newItem.children);
+    previousLevel = item.level; // Update the previous level
   }
 
   return organizedData;
@@ -46,7 +51,6 @@ function resolveHeading(collectionName, parentSlug, markdownContent) {
       const text = tokens[tokens.indexOf(token) + 1].content;
       const headingHtml = sanitizeHtml(text);
       const cleanSlug = headingHtml.toLowerCase().replace(/\s+/g, '-');
-      //   const hash = `#${cleanSlug}`;
       const link = `${parentSlug}#${cleanSlug}`;
 
       headings.push({ level, text, link });
@@ -59,11 +63,10 @@ function resolveHeading(collectionName, parentSlug, markdownContent) {
 
 export function enhanceContentCollection(contentCollectionOrigin) {
   const finalContent = contentCollectionOrigin.map((item, idx) => {
-    const headings = resolveHeading(item.collection, item.slug, item.body)
+    const headings = resolveHeading(item.collection, item.slug, item.body);
 
-    return { ...item, headings }
-  })
+    return { ...item, headings };
+  });
 
   return finalContent;
 }
-
