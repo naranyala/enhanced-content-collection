@@ -17,8 +17,46 @@ const FUSE_OPTIONS = {
 }
 
 
+function makeContentFlat(headings) {
+    const flattenedArray = [];
+  
+    function recursiveFlatten(currentHeadings) {
+      for (const heading of currentHeadings) {
+        flattenedArray.push({
+          type: heading.type,
+          text: heading.text,
+          link: heading.link,
+        });
+  
+        if (heading.children && heading.children.length > 0) {
+          recursiveFlatten(heading.children);
+        }
+      }
+    }
+  
+    recursiveFlatten(headings);
+    return flattenedArray;
+}
+
+function makeFinalContent(inputArray){
+  const updatedArray = inputArray.map((item, index) => {
+    if (item.type !== "h1") {
+        const parentHeading = inputArray.slice(0, index).reverse().find(entry => entry.type === "h1");
+        if (parentHeading) {
+            return {
+                ...item,
+                text: `${parentHeading.text} - ${item.text}`
+            };
+        }
+    }
+    return item;
+});
+return updatedArray;
+}
+
 export default function DemoFuzzySearch(props) {
   const [content, setContent] = createSignal(props.content)
+  const [headings, setHeadings] = createSignal([])
   const [query, setQuery] = createSignal("")
   const [result, setResult] = createSignal([])
 
@@ -27,7 +65,22 @@ export default function DemoFuzzySearch(props) {
   let elInputQuery
 
   onMount(() => {
-    elSearch.focus()
+    // elInputQuery.focus()
+    //console.log(JSON.stringify(content(), null, 2))
+    const searchContent = content().map(item => {
+      return item.headings;
+    });
+    
+    const flatContent = makeContentFlat([].concat(...searchContent))
+    const finalContent = makeFinalContent(flatContent)
+    setHeadings(finalContent)
+    //console.log(JSON.stringify(flatContent, null, 2))
+    console.log(headings())
+    
+   /*
+   console.log(JSON.stringify(searchContent, null, 2));
+    setHeadings(searchContent)
+    */
   })
 
   const handleSearchAction = (e) => {
@@ -48,10 +101,8 @@ export default function DemoFuzzySearch(props) {
   return (
    <div class="m-4 p-4">
           <div class="flex justify-between flex-col">
-            <span class="text-xl text-center mx-auto font-bold">Jump between content headings with fuzzy search (without network connection)</span>
-            <div class="flex flex-col items-center text-center w-full text-xl">
-              <span>Total match <b class="font-bold">{matchTotal()}</b></span>
-            </div>
+            <span class="text-xl text-center mx-auto font-bold">Jump between content headings<br/> (without network connection)</span>
+          
 
           </div>
 
@@ -66,14 +117,30 @@ export default function DemoFuzzySearch(props) {
             <button onClick={actionResetResult} class="absolute inset-y-0 right-0 px-4 py-auto m-1 bg-white/0 text-gray-700 hover:text-gray-900 content-center align-center rounded-r-lg font-bold">Reset</button>
           </div>
 
-          <span>All available content headings</span>
+        
           <ul class="space-y-1 overflow-x-auto">
             <Switch>
+              <Match when={headings().length}>
+                <For each={headings()}>
+
+                {(head, idx) => (
+                   <li key={idx} class="my-1 h-min">
+                   <a
+                     href={head.link}
+                     class="flex justify-between rounded-lg px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
+                   >{head.text}
+                   </a>
+                 </li>
+                )}
+                </For>
+              </Match>
+
               <Match when={content().length && result().length < 1}>
                 <div>
                   <h1 class="text-center text-xl font-bold">Not Found</h1>
                 </div>
               </Match>
+
               <Match when={result().length}>
                 <For each={result()}>
                   {(content, idx) => (
@@ -81,11 +148,7 @@ export default function DemoFuzzySearch(props) {
                       <a
                         href={content.item.slug}
                         class="flex justify-between rounded-lg px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
-                      >
-                        <h1 class="flex-1 text-lg text-left font-bold items-start">{content.item.data.title}</h1>
-                        <small class="flex-1 text-right right-0 items-end">{content.item.data.context}</small>
-                        <hr/>
-                        <div>{JSON.stringify(content.item.headings, null, 2)}</div>
+                      >{content.item.data.title}
                       </a>
                     </li>
 
