@@ -9,16 +9,9 @@ const FUSE_OPTIONS = {
   minMatchCharLength: 1,
   threshold: 0.5,
   keys: [
-    // { name: "data.title", weight: 1 },
-    // { name: "data.context", weight: 1 },
-    // { name: "data.tags", weight: 1 },
     { name: "text", weight: 1 },
     { name: "slug", weight: 1 },
     { name: "link", weight: 1 },
-    // { name: "headings", weight: 2 },
-    // { name: "headings.link", weight: 2 },
-    // { name: "headings.children.link", weight: 2 },
-    // { name: "headings.children.chidren.link", weight: 2 }
   ]
 }
 
@@ -75,19 +68,15 @@ export default function DemoFuzzySearch(props) {
     const flatContent = makeContentFlat([].concat(...searchContent))
     const finalContent = normalizeChildHeading(flatContent)
     setHeadings(finalContent)
-    // console.log(headings())
   })
 
   const handleSearchAction = (e) => {
     setQuery(e.target.value)
-    // console.log(query())
-    // console.log(`content:`, content())
-    console.log(`headings:`, headings())
 
     const fuse = new Fuse(headings(), FUSE_OPTIONS)
     const searchResult = fuse.search(query());
     setResult(searchResult)
-    console.log(`result:`, result())
+    //console.log(`result:`, result())
   }
 
   const actionResetResult = () => {
