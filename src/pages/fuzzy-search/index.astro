@@ -8,10 +8,13 @@ import { enhanceContentCollection } from '../../lib/utils/markdown'
 const demoCollection = await getCollection("en-demo")
 const finalCollection = enhanceContentCollection(demoCollection)
 
-console.log(finalCollection)
+// console.log(finalCollection)
 
 ---
 
 <Layout title="Demo Fuzzy Seach">
+  <div class="ml-8 mt-8">
+    <a href="/" class="hover:underline">BACK</a>
+  </div>
   <DemoFuzzySearch client:only content={finalCollection}/>
 </Layout>

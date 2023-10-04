@@ -48,7 +48,7 @@ export default function DemoFuzzySearch(props) {
   return (
    <div class="m-4 p-4">
           <div class="flex justify-between flex-col">
-            <span class="text-xl text-center mx-auto font-bold">Fuzzy Search</span>
+            <span class="text-xl text-center mx-auto font-bold">Jump between content headings</span>
             <div class="flex flex-col items-center text-center w-full text-xl">
               <span>Total match <b class="font-bold">{matchTotal()}</b></span>
             </div>
@@ -66,7 +66,7 @@ export default function DemoFuzzySearch(props) {
             <button onClick={actionResetResult} class="absolute inset-y-0 right-0 px-4 py-auto m-1 bg-white/0 text-gray-700 hover:text-gray-900 content-center align-center rounded-r-lg font-bold">Reset</button>
           </div>
 
-
+          <span>All available content headings</span>
           <ul class="space-y-1 overflow-x-auto">
             <Switch>
               <Match when={content().length && result().length < 1}>
